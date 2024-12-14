@@ -1,3 +1,5 @@
+//make sure to push to GitHub when new archive of new version is ready
+
 import SwiftUI
 
 struct ContentView: View {

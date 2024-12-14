@@ -1,6 +1,6 @@
-//make sure to push to GitHub when new archive of new version is ready
-
 import SwiftUI
+
+//make sure to push to GitHub when new archive of new version is ready.
 
 struct ContentView: View {
     @ObservedObject var viewModel = CardGameViewModel()

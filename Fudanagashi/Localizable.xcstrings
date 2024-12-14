@@ -1,6 +1,28 @@
 {
   "sourceLanguage" : "ja",
   "strings" : {
+    "**デベロッパーとクレジット**\n\n<<開発者>>\n**三森颯太, 大戸暢丈**, 2024.\n\n<<かるた取り札画像>>\nhttp://100poem.web.fc2.com/\n                    \n<<連絡先と公式HP>>\n- **メール**: sota.mitsumori@gmail.com\n- **ホームページ**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Developer and Credit**  <<Developer>> **Sota Mitsumori, Nobuhiro Oto**, 2024.  <<Card Images>> http://100poem.web.fc2.com/ \n<<Get in Touch>>\n- **Email**: sota.mitsumori@gmail.com\n- **Website**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desarrollador y Créditos\n\n<<Développé par>>\nSota Mitsumori, Nobuhiro Oto, 2024.\n\n<<Imágenes de las Cartas>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **Correo Electrónico**: sota.mitsumori@gmail.com\n- **Sitio Web**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "**Développeur et Crédit**\n\n<<Développeur>>\n**Sota Mitsumori, Nobuhiro Oto**, 2024.\n\n<<Images des cartes>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **E-mail** : sota.mitsumori@gmail.com\n- **Site Web** : https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
+          }
+        }
+      }
+    },
     "**ようこそ、札流しへ！**\n\n<目的>\nこのゲームの目標は百人一首の取り札全てをできるだけ早くスワイプするタイムアタックゲームです。\n\n<プレイ方法>\n- **札をスワイプ**:\n    実際のかるた札とおなじように、札をすきな方向にスワイプすることで次の札に進めます。\n\n- **ランダム上下反転**: \n    設定でこれを有効、無効にすることで、ゲームをよりチャレンジングにすることができます。\n\n- **タイマー**: \n    タイマーはあなたが１００枚のふだ流しにかかる時間を表示します。\n\n- **ベストスコア**: \n    あなたのベストスコアは記録され、ホーム画面に表示されます。\n\n***楽しんでプレイしてみてください!!***" : {
       "localizations" : {
         "en" : {
@@ -116,9 +138,6 @@
         }
       }
     },
-    "Date: %@" : {
-
-    },
     "elapsed_time_format" : {
       "comment" : "Format string for elapsed time",
       "localizations" : {
@@ -148,9 +167,6 @@
         }
       }
     },
-    "Game" : {
-
-    },
     "game_clear_message_best" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
@@ -160,7 +176,8 @@
             "value" : "%1$@\n%2$@\n%3$@"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "game_clear_message_try_again" : {
       "extractionState" : "extracted_with_value",
@@ -171,7 +188,8 @@
             "value" : "%1$@\n%2$@\n%3$@"
           }
         }
-      }
+      },
+      "shouldTranslate" : false
     },
     "game_clear_title" : {
       "localizations" : {
@@ -201,12 +219,6 @@
         }
       }
     },
-    "Past Games" : {
-
-    },
-    "Results" : {
-
-    },
     "time_elapsed" : {
       "localizations" : {
         "en" : {
@@ -234,12 +246,6 @@
           }
         }
       }
-    },
-    "Time: %@" : {
-
-    },
-    "Total Games Played: %lld" : {
-
     },
     "try_again" : {
       "localizations" : {
@@ -269,8 +275,8 @@
         }
       }
     },
-    "Version 2.0.0-beta (2024.XX.XX)" : {
-
+    "Version 2.0.1 (2024.12.13)" : {
+      "shouldTranslate" : false
     },
     "カードのランダム上下反転" : {
       "localizations" : {
@@ -290,28 +296,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rotation aléatoire des cartes"
-          }
-        }
-      }
-    },
-    "かるた取り札画像:\nhttp://100poem.web.fc2.com/\n\n開発者： **三森颯太, 大戸暢丈**, 2024.\n                    \n<<連絡先と公式HP>>\n- **メール**: sota.mitsumori@gmail.com\n- **ホームページ**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Card Images:\nhttp://100poem.web.fc2.com/\n\nDeveloped by **Sota Mitsumori, Nobuhiro Oto**, 2024.\n                    \n<<Get in Touch>>\n- **Email**: sota.mitsumori@gmail.com\n- **Website**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Images des cartes :\nhttp://100poem.web.fc2.com/\n\nDéveloppé par: **Sota Mitsumori, Nobuhiro Oto**, 2024.\n\n<<Contact>>\n-**E-mail** : sota.mitsumori@gmail.com\n-**Site web** : https://sota-mitsumori.github.io/Karuta-Fudanagashi/\n"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Images des cartes :\nhttp://100poem.web.fc2.com/\n\nDéveloppé par: **Sota Mitsumori, Nobuhiro Oto**, 2024.\n\n<<Contact>>\n-**E-mail** : sota.mitsumori@gmail.com\n-**Site web** : https://sota-mitsumori.github.io/Karuta-Fudanagashi/\n"
           }
         }
       }
@@ -338,14 +322,115 @@
         }
       }
     },
+    "ゲーム" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Game"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Juego"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeu"
+          }
+        }
+      }
+    },
     "ゲームスコアリセット" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Game Score"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer la puntuación del juego"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser le score du jeu"
+          }
+        }
+      }
     },
     "ゲームスコアをリセット" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reset Game Score"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restablecer la puntuación del juego"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Réinitialiser le score du jeu"
+          }
+        }
+      }
     },
     "ゲームスコアをリセットしますか？" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you really want to reset the game score?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Realmente deseas restablecer la puntuación del juego?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voulez-vous vraiment réinitialiser le score du jeu ?"
+          }
+        }
+      }
+    },
+    "これまでの総プレイ回数: %lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Games Played: %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de juegos jugados: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre total de parties jouées : %lld"
+          }
+        }
+      }
     },
     "さあゲームに挑戦だ！" : {
       "localizations" : {
@@ -369,9 +454,6 @@
         }
       }
     },
-    "スコアをリセットしますか？" : {
-
-    },
     "スタート" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -391,28 +473,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jouer"
-          }
-        }
-      }
-    },
-    "デベロッパーとクレジット" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About the Developer and Credit"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desarrolladores y Créditos"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Développeur et Crédit"
           }
         }
       }
@@ -551,6 +611,50 @@
         }
       }
     },
+    "情報" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Info"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Información"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Infos"
+          }
+        }
+      }
+    },
+    "日付: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date : %@"
+          }
+        }
+      }
+    },
     "時間:" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -592,28 +696,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affichage des cartes"
-          }
-        }
-      }
-    },
-    "概要" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Resumen"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "About"
           }
         }
       }
@@ -662,8 +744,71 @@
         }
       }
     },
+    "結果" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resultado"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résultat"
+          }
+        }
+      }
+    },
     "表示する過去のゲームがありません" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No past game score to display"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay puntuación de juegos anteriores para mostrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun score de jeu précédent à afficher"
+          }
+        }
+      }
+    },
+    "記録: %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Result:%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résultat : %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résultat : %@"
+          }
+        }
+      }
     },
     "記録リセット" : {
       "localizations" : {
@@ -705,6 +850,72 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Settings"
+          }
+        }
+      }
+    },
+    "過去のゲーム結果" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Past Game Result"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resultados Pasados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Résultats Passés"
+          }
+        }
+      }
+    },
+    "閉じる" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fermer"
+          }
+        }
+      }
+    },
+    "開発者とクレジット" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developer and Credit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desarrollador y Créditos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Développeur et Crédit"
           }
         }
       }

@@ -8,7 +8,6 @@ class CardGameViewModel: ObservableObject {
     @Published var cardRotation: Double = 0
     @Published var startTime: Date?
     @Published var endTime: Date?
-//    @Published var bestScore: TimeInterval?
     
     @Published var previousCard: Card?
     @Published var previousCardOffset: CGSize = .zero
@@ -140,29 +139,6 @@ class CardGameViewModel: ObservableObject {
         cards = loadedCards.shuffled()
     }
     
-//    func loadBestScore() {
-//        let defaults = UserDefaults.standard
-//        if let savedBestScore = defaults.object(forKey: "bestScore") as? TimeInterval {
-//            bestScore = savedBestScore
-//        } else {
-//            bestScore = nil
-//        }
-//    }
-//    
-//    func resetBestScore() {
-//        bestScore = nil
-//        saveBestScore()
-//    }
-//    
-//    func saveBestScore() {
-//        let defaults = UserDefaults.standard
-//        if let bestScore = bestScore {
-//            defaults.set(bestScore, forKey: "bestScore")
-//        } else {
-//            defaults.removeObject(forKey: "bestScore")
-//        }
-//    }
-    
     func resetPastResults() {
         pastResults.removeAll()
         savePastResults()
@@ -283,6 +259,8 @@ struct CardGameView: View {
     
     var body: some View {
         GeometryReader { geometry in
+            let screenWidth = geometry.size.width
+            let screenHeight = geometry.size.height
             ZStack {
                 if viewModel.showStartButton {
                     if viewModel.showEndButton{
@@ -305,7 +283,7 @@ struct CardGameView: View {
                 VStack {
                     if !viewModel.showStartButton {
                         singleCardView
-                            .padding(.top, 100)
+                            .padding(.top, geometry.size.height * 0.15)
                         Spacer()
                     }
                 }
@@ -329,10 +307,10 @@ struct CardGameView: View {
                 // Message Label
                 if viewModel.showMessageLabel {
                     Text(viewModel.message)
-                        .font(.system(size: 24))
+                        .font(.system(size: min(screenWidth, screenHeight) * 0.05))
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
-                        .padding(.bottom, 100)
+                        .padding(.bottom, screenHeight * 0.1)
                         .foregroundColor(.black)
                 }
                 
@@ -342,12 +320,12 @@ struct CardGameView: View {
                         Spacer()
                         if let bestScore = viewModel.bestScore {
                             Text("ベストスコア: \(String(format: "%.2f", bestScore))秒")
-                                .font(.largeTitle)
+                                .font(.system(size: min(screenWidth, screenHeight) * 0.06))
                                 .fontWeight(.bold)
                                 .padding(.bottom, geometry.size.height * 0.01)
                         } else {
                             Text("さあゲームに挑戦だ！")
-                                .font(.largeTitle)
+                                .font(.system(size: min(screenWidth, screenHeight) * 0.06))
                                 .fontWeight(.bold)
                                 .padding(.bottom, geometry.size.height * 0.01)
                         }
@@ -355,8 +333,8 @@ struct CardGameView: View {
                             viewModel.startButtonTapped()
                         }) {
                             Text(viewModel.startTime == nil ? "スタート" : "もう一回")
-                                .font(.system(size: 30))
-                                .frame(width: 200, height: 50)
+                                .font(.system(size: min(screenWidth, screenHeight) * 0.05))
+                                .frame(width: screenWidth * 0.5, height: screenHeight * 0.07)
                                 .background(Color(UIColor.systemBackground))
                                 .foregroundColor(.primary)
                                 .overlay(
@@ -376,8 +354,8 @@ struct CardGameView: View {
                             viewModel.endButtonTapped()
                         }) {
                             Text("ホームへ")
-                                .font(.system(size: 30))
-                                .frame(width: 200, height: 50)
+                                .font(.system(size: min(screenWidth, screenHeight) * 0.05))
+                                .frame(width: screenWidth * 0.5, height: screenHeight * 0.07)
                                 .background(Color(UIColor.systemBackground))
                                 .foregroundColor(.primary)
                                 .overlay(
@@ -385,7 +363,7 @@ struct CardGameView: View {
                                         .stroke(Color.primary, lineWidth: 2)
                                 )
                         }
-                        .padding(.bottom, geometry.size.height * 0.02)
+                        .padding(.bottom, geometry.size.height * 0.01)
                     }
                 }
                 

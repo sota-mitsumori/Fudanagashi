@@ -38,27 +38,7 @@ struct AboutView: View {
                         .multilineTextAlignment(.leading)
                         .padding(.all, 20)
                     
-                    // Credits
-                    Text("デベロッパーとクレジット")
-                        .font(.title)
-                        .fontWeight(.bold)
-                        .padding(.horizontal, 20)
-                    
-                    Text("""
-                    かるた取り札画像:
-                    http://100poem.web.fc2.com/
-                    
-                    開発者： **三森颯太, 大戸暢丈**, 2024.
-                                        
-                    <<連絡先と公式HP>>
-                    - **メール**: sota.mitsumori@gmail.com
-                    - **ホームページ**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/
-                    """)
-                    .font(.body)
-                    .multilineTextAlignment(.leading)
-                    .padding(.all, 20)
-                    
-                    .navigationBarTitle("概要", displayMode: .inline)
+                    .navigationBarTitle("プレイ方法", displayMode: .inline)
                     .navigationBarItems(trailing: Button("終了") {
                         presentationMode.wrappedValue.dismiss()
                         })

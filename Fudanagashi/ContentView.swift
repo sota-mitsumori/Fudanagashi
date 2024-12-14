@@ -39,7 +39,6 @@ struct ContentView: View {
                     
                     NavigationView {
                         PastGamesView(viewModel: viewModel)
-                            .navigationBarTitle("Past Games", displayMode: .large)
                     }
                     .tabItem {
                         Image(systemName: "clock")

@@ -16,40 +16,22 @@ struct PastGamesView: View {
                         .foregroundColor(.gray)
                         .padding()
                 } else {
-                    Text("Total Games Played: \(viewModel.pastResults.count)")
+                    Text("これまでの総プレイ回数: \(viewModel.pastResults.count)")
 //                        .font(.headline)
 //                        .padding(.top)
                     List(viewModel.pastResults.sorted(by: { $0.date > $1.date })) { result in
                         HStack {
                             VStack(alignment: .leading) {
-                                Text("Date: \(result.date, formatter: dateFormatter)")
+                                Text("日付: \(result.date, formatter: dateFormatter)")
                                     .font(.headline)
-                                Text("Time: \(formattedTime(result.elapsedTime))")
+                                Text("記録: \(formattedTime(result.elapsedTime))")
                                     .font(.subheadline)
                             }
                             Spacer()
                         }
                         .padding(.vertical, 5)
                     }
-                    .navigationBarTitle("Past Games", displayMode: .large)
-                    .navigationBarItems(trailing:
-                        Button(action: {
-                            self.isShowingAlert = true
-                        }) {
-                            Image(systemName: "trash")
-                        }
-                        .disabled(viewModel.pastResults.isEmpty)
-                        .alert(isPresented: $isShowingAlert) {
-                            Alert(
-                                title: Text("記録リセット"),
-                                message: Text("スコアをリセットしますか？"),
-                                primaryButton: .destructive(Text("リセット"), action: {
-
-                                }),
-                                secondaryButton: .cancel(Text("キャンセル"))
-                            )
-                        }
-                    )
+                    .navigationBarTitle("過去のゲーム結果", displayMode: .large)
                 }
             }
         }
@@ -65,7 +47,7 @@ struct PastGamesView: View {
     
     // Helper function to format TimeInterval
     private func formattedTime(_ interval: TimeInterval) -> String {
-        let seconds = Int(interval) % 60
+        let seconds = Int(interval)
         let fractions = Int((interval - Double(Int(interval))) * 100)
         return String(format: "%d.%02d seconds", seconds, fractions)
     }

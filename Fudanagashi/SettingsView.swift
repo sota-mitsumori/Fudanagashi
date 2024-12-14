@@ -5,6 +5,7 @@ struct SettingsView: View {
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: CardGameViewModel
     @State private var isShowingAlert: Bool = false
+    @State private var isShowingDev: Bool = false
 
     var body: some View {
         NavigationView {
@@ -34,14 +35,31 @@ struct SettingsView: View {
                         )
                     }
                 }
+                
+                Section(header: Text("情報")) {  // Updated header for clarity
+                    Button(action: {
+                        self.isShowingDev = true
+                    }) {
+                        HStack {
+                            Text("開発者とクレジット")
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundColor(.gray)
+                        }
+                    }
+                }
+                
                 Section(header: Text("バージョン")) {
-                    Text("Version 2.0.0-beta (2024.XX.XX)")
+                    Text("Version 2.0.1 (2024.12.13)")
                 }
             }
             .navigationBarTitle("設定", displayMode: .inline)
             .navigationBarItems(trailing: Button("終了") {
                 presentationMode.wrappedValue.dismiss()
             })
+            .sheet(isPresented: $isShowingDev) {  // Present the sheet
+                DeveloperView()
+            }
         }
     }
 }

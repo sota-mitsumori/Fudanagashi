@@ -1,24 +1,24 @@
 {
   "sourceLanguage" : "ja",
   "strings" : {
-    "**デベロッパーとクレジット**\n\n<<開発者>>\n**三森颯太, 大戸暢丈**, 2024.\n\n<<かるた取り札画像>>\nhttp://100poem.web.fc2.com/\n                    \n<<連絡先と公式HP>>\n- **メール**: sota.mitsumori@gmail.com\n- **ホームページ**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/" : {
+    "**デベロッパーとクレジット**\n\n<<開発者>>\n**三森颯太, 大戸暢丈**, 2024-2025.\n\n<<かるた取り札画像>>\nhttp://100poem.web.fc2.com/\n                    \n<<連絡先と公式HP>>\n- **メール**: sota.mitsumori@gmail.com\n- **ホームページ**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Developer and Credit**  <<Developer>> **Sota Mitsumori, Nobuhiro Oto**, 2024.  <<Card Images>> http://100poem.web.fc2.com/ \n<<Get in Touch>>\n- **Email**: sota.mitsumori@gmail.com\n- **Website**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
+            "value" : "**Developer and Credit**  <<Developer>> **Sota Mitsumori, Nobuhiro Oto**, 2024-2025.  <<Card Images>> http://100poem.web.fc2.com/ \n<<Get in Touch>>\n- **Email**: sota.mitsumori@gmail.com\n- **Website**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Desarrollador y Créditos\n\n<<Développé par>>\nSota Mitsumori, Nobuhiro Oto, 2024.\n\n<<Imágenes de las Cartas>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **Correo Electrónico**: sota.mitsumori@gmail.com\n- **Sitio Web**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
+            "value" : "Desarrollador y Créditos\n\n<<Développé par>>\nSota Mitsumori, Nobuhiro Oto, 2024-2025.\n\n<<Imágenes de las Cartas>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **Correo Electrónico**: sota.mitsumori@gmail.com\n- **Sitio Web**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "**Développeur et Crédit**\n\n<<Développeur>>\n**Sota Mitsumori, Nobuhiro Oto**, 2024.\n\n<<Images des cartes>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **E-mail** : sota.mitsumori@gmail.com\n- **Site Web** : https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
+            "value" : "**Développeur et Crédit**\n\n<<Développeur>>\n**Sota Mitsumori, Nobuhiro Oto**, 2024-2025.\n\n<<Images des cartes>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **E-mail** : sota.mitsumori@gmail.com\n- **Site Web** : https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
           }
         }
       }
@@ -275,7 +275,7 @@
         }
       }
     },
-    "Version 2.0.1 (2024.12.13)" : {
+    "Version 2.0.2 (2025.01.06)" : {
       "shouldTranslate" : false
     },
     "カードのランダム上下反転" : {

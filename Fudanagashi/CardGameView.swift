@@ -262,24 +262,6 @@ struct CardGameView: View {
             let screenWidth = geometry.size.width
             let screenHeight = geometry.size.height
             ZStack {
-                if viewModel.showStartButton {
-                    if viewModel.showEndButton{
-                        // End Screen Bacground Image
-                        Image("background_finish")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: geometry.size.width * 0.7)
-                            .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
-                    } else {
-                        // Home Screen Background Image
-                        Image("background_start")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(maxWidth: geometry.size.width * 0.7)
-                            .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
-                    }
-                    
-                }
                 VStack {
                     if !viewModel.showStartButton {
                         singleCardView
@@ -323,6 +305,7 @@ struct CardGameView: View {
                                 .font(.system(size: min(screenWidth, screenHeight) * 0.06))
                                 .fontWeight(.bold)
                                 .padding(.bottom, geometry.size.height * 0.01)
+                                .multilineTextAlignment(.center) // Center the text
                         } else {
                             Text("さあゲームに挑戦だ！")
                                 .font(.system(size: min(screenWidth, screenHeight) * 0.06))
@@ -342,6 +325,7 @@ struct CardGameView: View {
                                         .stroke(Color.primary, lineWidth: 2)
                                 )
                         }
+                        .frame(maxWidth: .infinity) // Make VStack take full width
                         .padding(.bottom, geometry.size.height * 0.14)
                     }
                 }
@@ -370,10 +354,6 @@ struct CardGameView: View {
             }
             .onChange(of: randomRotation) { newValue in
                 viewModel.loadImages()
-            }
-            // Apply navigation modifiers to NavigationView
-            .sheet(isPresented: $showSettings) {
-                SettingsView(viewModel: viewModel)
             }
         }
     }
@@ -498,12 +478,12 @@ struct GameResult: Codable, Identifiable {
 }
 
 
-extension Array {
-    subscript(safe index: Int) -> Element? {
-        return indices.contains(index) ? self[index] : nil
-    }
-}
-    
+//extension Array {
+//    subscript(safe index: Int) -> Element? {
+//        return indices.contains(index) ? self[index] : nil
+//    }
+//}
+//    
     
 struct CardGameView_Previews: PreviewProvider {
     static var previews: some View {

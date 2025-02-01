@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @AppStorage("randomRotation") private var randomRotation: Bool = true
+    @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
+    @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: CardGameViewModel
     @State private var isShowingAlert: Bool = false
@@ -16,6 +18,11 @@ struct SettingsView: View {
                                             viewModel.loadImages()
                     }
                 }
+                Section(header: Text("表示オプション")) {
+                    Toggle("経過時間を表示", isOn: $displayTimerLabel)
+                    Toggle("残り枚数を表示", isOn: $displayCardsLeftLabel)
+                }
+                
                 Section(header: Text("ゲームスコアリセット")) {
                     Button(action: {
                         self.isShowingAlert = true
@@ -50,7 +57,7 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("バージョン")) {
-                    Text("Version 2.0.3-beta (2025.01.27)")
+                    Text("Version 2.0.3-beta (2025.02.01)")
                 }
             }
             .navigationBarTitle("設定", displayMode: .inline)

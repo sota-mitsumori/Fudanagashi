@@ -35,7 +35,7 @@ class CardGameViewModel: ObservableObject {
         return pastResults.min(by: { $0.elapsedTime < $1.elapsedTime })?.elapsedTime
     }
     
-    // New Properties for Streaks
+    // New Properties for Streaks (Not implemented yet)
     @AppStorage("currentStreak") var currentStreak: Int = 0
     @AppStorage("bestStreak") var bestStreak: Int = 0
     
@@ -254,6 +254,8 @@ class CardGameViewModel: ObservableObject {
 struct CardGameView: View {
     @StateObject var viewModel = CardGameViewModel()
     @State private var showSettings = false
+    @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
+    @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
     @AppStorage("cardLayout") private var cardLayout: String = "Single"
     @AppStorage("randomRotation") private var randomRotation: Bool = true
     
@@ -270,17 +272,20 @@ struct CardGameView: View {
                     }
                 }
                 
-                // Timer and Cards Left Labels
-                if viewModel.showTimerLabel {
+                if viewModel.showTimerLabel || viewModel.showCardsLeftLabel {
                     VStack {
                         HStack {
-                            Text(viewModel.cardsLeftLabel)
-                                .font(.system(size: 24))
-                                .padding(.leading, 20)
+                            if viewModel.showCardsLeftLabel {
+                                Text(displayCardsLeftLabel ? viewModel.cardsLeftLabel : NSLocalizedString("残り: --枚", comment: "Cards left hidden"))
+                                    .font(.system(size: 24))
+                                    .padding(.leading, 20)
+                            }
                             Spacer()
-                            Text(viewModel.timerLabel)
-                                .font(.system(size: 24))
-                                .padding(.trailing, 20)
+                            if viewModel.showTimerLabel {
+                                Text(displayTimerLabel ? viewModel.timerLabel : NSLocalizedString("経過時間: --秒", comment: "Time elapsed hidden"))
+                                    .font(.system(size: 24))
+                                    .padding(.trailing, 20)
+                            }
                         }
                         Spacer()
                     }

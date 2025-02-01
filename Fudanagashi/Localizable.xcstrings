@@ -275,7 +275,7 @@
         }
       }
     },
-    "Version 2.0.3-beta (2025.01.08)" : {
+    "Version 2.0.3-beta (2025.02.01)" : {
       "shouldTranslate" : false
     },
     "カードのランダム上下反転" : {
@@ -700,6 +700,51 @@
         }
       }
     },
+    "残り: --枚" : {
+      "comment" : "Cards left hidden",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cards Left: —"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartas Restantes: —"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cartes Restantes: —"
+          }
+        }
+      }
+    },
+    "残り枚数を表示" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display Cards left"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar cartas restantes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher les cartes restantes"
+          }
+        }
+      }
+    },
     "百人一首札流し" : {
       "localizations" : {
         "en" : {
@@ -744,6 +789,51 @@
         }
       }
     },
+    "経過時間: --秒" : {
+      "comment" : "Time elapsed hidden",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time: —s"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tiempo: —s"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temps: —s"
+          }
+        }
+      }
+    },
+    "経過時間を表示" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display Elapsed Time"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar tiempo transcurrido"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le temps écoulé"
+          }
+        }
+      }
+    },
     "結果" : {
       "localizations" : {
         "en" : {
@@ -762,6 +852,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Résultat"
+          }
+        }
+      }
+    },
+    "表示オプション" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display Options"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Opciones de visualización"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Options d’affichage"
           }
         }
       }

@@ -20,4 +20,9 @@
 4. ベストスコア  
 あなたのベストスコアは記録され、ホーム画面に表示されます。
 
+## Download
+このアプリは現在iOSのApp Storeで公開しており、iPhone, iPad, Mac, Vision Proでダウンロード可能です。　
+
+https://apps.apple.com/jp/app/fudanagashi/id6737144293?l=en-US 
+
 

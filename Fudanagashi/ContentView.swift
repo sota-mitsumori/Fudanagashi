@@ -58,12 +58,12 @@ struct ContentView: View {
                                 }
                             if viewModel.showStartButton {
                                 if viewModel.showEndButton{
-//                                     //End Screen Bacground Image
-//                                    Image("background_finish")
-//                                        .resizable()
-//                                        .scaledToFit()
-//                                        .frame(maxWidth: geometry.size.width * 0.6)
-//                                        .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
+                                     //End Screen Bacground Image
+                                    Image("background_finish")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(maxWidth: geometry.size.width * 0.6)
+                                        .position(x: geometry.size.width / 2, y: geometry.size.height / 3)
                                 } else {
                                     // Layered Images
                                     // Previous Image

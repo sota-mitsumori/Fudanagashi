@@ -298,7 +298,7 @@ struct CardGameView: View {
                         .multilineTextAlignment(.center)
                         .fontWeight(.bold)
                         .padding(.bottom, screenHeight * 0.1)
-                        .foregroundColor(.black)
+                        .foregroundColor(.primary)
                 }
                 
                 // Start Button

@@ -35,6 +35,7 @@ struct PastGamesView: View {
                 }
             }
         }
+        .navigationViewStyle(.stack)
     }
 
     // DateFormatter for displaying the date

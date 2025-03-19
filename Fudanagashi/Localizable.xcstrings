@@ -45,6 +45,16 @@
         }
       }
     },
+    "%@\n%@\n%@" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@\n%2$@\n%3$@"
+          }
+        }
+      }
+    },
     "best_score" : {
       "localizations" : {
         "en" : {
@@ -166,30 +176,6 @@
           }
         }
       }
-    },
-    "game_clear_message_best" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@\n%2$@\n%3$@"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
-    "game_clear_message_try_again" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@\n%2$@\n%3$@"
-          }
-        }
-      },
-      "shouldTranslate" : false
     },
     "game_clear_title" : {
       "localizations" : {

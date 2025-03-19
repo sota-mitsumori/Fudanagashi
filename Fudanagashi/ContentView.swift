@@ -110,6 +110,7 @@ struct ContentView: View {
                             }
                         }
                     }
+                    .navigationViewStyle(.stack)
                     .tabItem {
                         Image(systemName: "gamecontroller")
                         Text("ゲーム")

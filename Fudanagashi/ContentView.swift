@@ -112,14 +112,14 @@ struct ContentView: View {
                     }
                     .navigationViewStyle(.stack)
                     .tabItem {
-                        Image(systemName: "gamecontroller")
+                        Image(systemName: "play.circle")
                         Text("ゲーム")
                     }
                     NavigationView {
                         PastGamesView(viewModel: viewModel)
                     }
                     .tabItem {
-                        Image(systemName: "clock")
+                        Image(systemName: "chart.bar.xaxis")
                         Text("結果")
                     }
                     

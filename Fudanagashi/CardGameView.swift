@@ -127,7 +127,7 @@ class CardGameViewModel: ObservableObject {
     func loadImages() {
         var loadedCards: [Card] = []
         for i in 1...100 {
-            let imageName = "torifuda\(i)"
+            let imageName = "torifuda_F_\(i)"
             if let uiImage = UIImage(named: imageName) {
                 let isRotated = randomRotation ? Bool.random() : false
                             let card = Card(image: uiImage, isRotated: isRotated)

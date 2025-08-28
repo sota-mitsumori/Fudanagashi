@@ -1,28 +1,6 @@
 {
   "sourceLanguage" : "ja",
   "strings" : {
-    "**デベロッパーとクレジット**\n\n<<開発者>>\n**三森颯太, 大戸暢丈**, 2024-2025.\n\n<<かるた取り札画像>>\nhttp://100poem.web.fc2.com/\n                    \n<<連絡先と公式HP>>\n- **メール**: sota.mitsumori@gmail.com\n- **ホームページ**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "**Developer and Credit**  <<Developer>> **Sota Mitsumori, Nobuhiro Oto**, 2024-2025.  <<Card Images>> http://100poem.web.fc2.com/ \n<<Get in Touch>>\n- **Email**: sota.mitsumori@gmail.com\n- **Website**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Desarrollador y Créditos\n\n<<Développé par>>\nSota Mitsumori, Nobuhiro Oto, 2024-2025.\n\n<<Imágenes de las Cartas>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **Correo Electrónico**: sota.mitsumori@gmail.com\n- **Sitio Web**: https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "**Développeur et Crédit**\n\n<<Développeur>>\n**Sota Mitsumori, Nobuhiro Oto**, 2024-2025.\n\n<<Images des cartes>>\nhttp://100poem.web.fc2.com/\n\n<<Contact>>\n- **E-mail** : sota.mitsumori@gmail.com\n- **Site Web** : https://sota-mitsumori.github.io/Karuta-Fudanagashi/"
-          }
-        }
-      }
-    },
     "**ようこそ、札流しへ！**\n\n<目的>\nこのゲームの目標は百人一首の取り札全てをできるだけ早くスワイプするタイムアタックゲームです。\n\n<プレイ方法>\n- **札をスワイプ**:\n    実際のかるた札とおなじように、札をすきな方向にスワイプすることで次の札に進めます。\n\n- **ランダム上下反転**: \n    設定でこれを有効、無効にすることで、ゲームをよりチャレンジングにすることができます。\n\n- **タイマー**: \n    タイマーはあなたが１００枚のふだ流しにかかる時間を表示します。\n\n- **ベストスコア**: \n    あなたのベストスコアは記録され、ホーム画面に表示されます。\n\n***楽しんでプレイしてみてください!!***" : {
       "localizations" : {
         "en" : {
@@ -44,6 +22,9 @@
           }
         }
       }
+    },
+    "2024-2025" : {
+      "shouldTranslate" : false
     },
     "best_score" : {
       "localizations" : {
@@ -219,6 +200,9 @@
         }
       }
     },
+    "sota.mitsumori@gmail.com" : {
+      "shouldTranslate" : false
+    },
     "time_elapsed" : {
       "localizations" : {
         "en" : {
@@ -275,8 +259,30 @@
         }
       }
     },
-    "Version 2.0.4 (2025.04.03)" : {
+    "Version 2.1.0 (2025.08.29)" : {
       "shouldTranslate" : false
+    },
+    "オリジナル画像のページを開く" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open the source website"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Abrir el sitio web de origen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ouvrir le site source"
+          }
+        }
+      }
     },
     "カードのランダム上下反転" : {
       "localizations" : {
@@ -296,6 +302,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rotation aléatoire des cartes"
+          }
+        }
+      }
+    },
+    "かるた取り札画像" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karuta Card Images"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Imágenes de cartas de Karuta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Images des cartes de Karuta"
+          }
+        }
+      }
+    },
+    "かるた取り札画像は@momokohanakoさんのものを使用しています。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karuta Card Images are used under the permission of @momokohanako "
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Las imágenes de cartas de Karuta se utilizan con el permiso de @momokohanako."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Les images des cartes de Karuta sont utilisées avec l’autorisation de @momokohanako."
           }
         }
       }
@@ -477,6 +527,28 @@
         }
       }
     },
+    "デベロッパーとクレジット" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developer and Credit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desarrollador y Créditos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Développeur et Crédit"
+          }
+        }
+      }
+    },
     "バージョン" : {
       "localizations" : {
         "en" : {
@@ -566,6 +638,50 @@
         }
       }
     },
+    "ホームページ:" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HP:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sitio web:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site web:"
+          }
+        }
+      }
+    },
+    "メール:" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email:"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Correo:"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email:"
+          }
+        }
+      }
+    },
     "もう一回" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -607,6 +723,50 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "réinitialiser"
+          }
+        }
+      }
+    },
+    "三森颯太, 大戸暢丈" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sota Mitsumori, Nobuhiro Oto"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sota Mitsumori, Nobuhiro Oto"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sota Mitsumori, Nobuhiro Oto"
+          }
+        }
+      }
+    },
+    "公式サイト" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Official Website"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sitio oficial"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Site officiel"
           }
         }
       }
@@ -966,6 +1126,28 @@
         }
       }
     },
+    "連絡先と公式HP" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get in touch"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contáctanos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contactez-nous"
+          }
+        }
+      }
+    },
     "過去のゲーム結果" : {
       "localizations" : {
         "en" : {
@@ -1006,6 +1188,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fermer"
+          }
+        }
+      }
+    },
+    "開発者" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Developers"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Desarrollador"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Développeur"
           }
         }
       }

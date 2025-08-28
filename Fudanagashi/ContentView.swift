@@ -9,7 +9,7 @@ struct ContentView: View {
     @State private var showAbout = false
     
     // 1. Define the image sequence
-    let backgroundImages = (1...100).map { "torifuda\($0)" }
+    let backgroundImages = (1...100).map { "torifuda_F_\($0)" }
     
     // 2. State variable for current image index
     @State private var currentImageIndex = 0

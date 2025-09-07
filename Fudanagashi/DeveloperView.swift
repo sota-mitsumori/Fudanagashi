@@ -23,9 +23,6 @@ struct DeveloperView: View {
                     }
                 }
             }
-            .background(
-                colorScheme == .dark ? Color.black.opacity(0.8) : Color(UIColor.systemGroupedBackground)
-            )
         }
     }
     

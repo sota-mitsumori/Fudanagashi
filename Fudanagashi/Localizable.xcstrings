@@ -527,6 +527,28 @@
         }
       }
     },
+    "データ同期" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync Data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizar datos"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchroniser les données"
+          }
+        }
+      }
+    },
     "デベロッパーとクレジット" : {
       "localizations" : {
         "en" : {
@@ -745,6 +767,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sota Mitsumori, Nobuhiro Oto"
+          }
+        }
+      }
+    },
+    "他のApple端末とデータを同期" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync data with other Apple devices"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sincronizar datos con otros dispositivos Apple"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Synchroniser les données avec d’autres appareils Apple"
           }
         }
       }

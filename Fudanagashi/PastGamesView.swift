@@ -56,6 +56,12 @@ struct PastGamesView: View {
 
 struct PastGamesView_Previews: PreviewProvider {
     static var previews: some View {
-        PastGamesView(viewModel: CardGameViewModel())
+        let viewModel = CardGameViewModel()
+        // Add some dummy data for preview
+        viewModel.pastResults = [
+            GameResult(date: Date().addingTimeInterval(-1000), elapsedTime: 123.45),
+            GameResult(date: Date(), elapsedTime: 110.99)
+        ]
+        return PastGamesView(viewModel: viewModel)
     }
 }

@@ -4,7 +4,7 @@ import UIKit
 //make sure to push to GitHub when new archive of new version is ready.
 
 struct ContentView: View {
-    @ObservedObject var viewModel = CardGameViewModel()
+    @StateObject var viewModel = CardGameViewModel()
     @State private var showSettings = false
     @State private var showAbout = false
     

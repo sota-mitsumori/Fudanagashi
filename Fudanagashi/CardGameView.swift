@@ -23,46 +23,155 @@ class CardGameViewModel: ObservableObject {
     @Published var showCardsLeftLabel: Bool = false
     @Published var showMessageLabel: Bool = false
     
+    // Synced Properties
     @Published var pastResults: [GameResult] = []
-    private let pastResultsKey = "pastResults"
-    
+    @Published var currentStreak: Int = 0
+    @Published var bestStreak: Int = 0
+
+    // Device-Local Settings
     @AppStorage("randomRotation") private var randomRotation: Bool = true
-    
+
+    private let iCloudStore = NSUbiquitousKeyValueStore.default
+
+    // iCloud Keys
+    private let pastResultsKey = "pastResults_v2"
+    private let currentStreakKey = "currentStreak"
+    private let bestStreakKey = "bestStreak"
+
     var gameTimer: AnyCancellable?
     
-    // Computed property for the best score
     var bestScore: TimeInterval? {
         return pastResults.min(by: { $0.elapsedTime < $1.elapsedTime })?.elapsedTime
     }
     
-    // New Properties for Streaks (Not implemented yet)
-    @AppStorage("currentStreak") var currentStreak: Int = 0
-    @AppStorage("bestStreak") var bestStreak: Int = 0
-    
     init() {
+        migrateDataIfNeeded() // Run migration first
+        loadFromiCloud(completion: {})      // Then load data
         loadImages()
-//        loadBestScore()
-        loadPastResults()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(ubiquitousKeyValueStoreDidChange),
+            name: NSUbiquitousKeyValueStore.didChangeExternallyNotification,
+            object: iCloudStore
+        )
     }
     
-    // Load past results from UserDefaults
-    func loadPastResults() {
-        let defaults = UserDefaults.standard
-        if let savedData = defaults.data(forKey: pastResultsKey) {
-            if let decoded = try? JSONDecoder().decode([GameResult].self, from: savedData) {
-                pastResults = decoded
+    private func migrateDataIfNeeded() {
+        let userDefaults = UserDefaults.standard
+        let oldPastResultsKey = "pastResults"
+
+        // Check if there is old local data to migrate.
+        guard let localResultsData = userDefaults.data(forKey: oldPastResultsKey) else {
+            // No old data found, no migration needed for this device.
+            return
+        }
+
+        print("Starting data migration from UserDefaults to iCloud...")
+
+        // 1. Read Local Data
+        let localPastResults = (try? JSONDecoder().decode([GameResult].self, from: localResultsData)) ?? []
+        let localCurrentStreak = userDefaults.integer(forKey: "currentStreak")
+        let localBestStreak = userDefaults.integer(forKey: "bestStreak")
+
+        // 2. Read iCloud Data
+        var icloudPastResults: [GameResult] = []
+        if let icloudResultsData = iCloudStore.data(forKey: pastResultsKey) {
+            icloudPastResults = (try? JSONDecoder().decode([GameResult].self, from: icloudResultsData)) ?? []
+        }
+        let icloudCurrentStreak = Int(iCloudStore.longLong(forKey: currentStreakKey))
+        let icloudBestStreak = Int(iCloudStore.longLong(forKey: bestStreakKey))
+
+        // 3. Merge Data
+        let combinedResults = Set(localPastResults + icloudPastResults)
+        let mergedPastResults = Array(combinedResults)
+
+        let mergedCurrentStreak = max(localCurrentStreak, icloudCurrentStreak)
+        let mergedBestStreak = max(localBestStreak, icloudBestStreak)
+
+        // 4. Save Merged Data to iCloud
+        if let encodedResults = try? JSONEncoder().encode(mergedPastResults) {
+            iCloudStore.set(encodedResults, forKey: pastResultsKey)
+        }
+        iCloudStore.set(Int64(mergedCurrentStreak), forKey: currentStreakKey)
+        iCloudStore.set(Int64(mergedBestStreak), forKey: bestStreakKey)
+        iCloudStore.synchronize()
+
+        print("Successfully merged data. Cleaning up local data...")
+
+        // 5. Clean Up Local Data to prevent re-migration
+        userDefaults.removeObject(forKey: oldPastResultsKey)
+        userDefaults.removeObject(forKey: "currentStreak")
+        userDefaults.removeObject(forKey: "bestStreak")
+        userDefaults.synchronize()
+        
+        print("Migration complete.")
+    }
+    
+    @objc func ubiquitousKeyValueStoreDidChange(_ notification: Notification) {
+        loadFromiCloud(completion: {})
+    }
+    
+    func loadFromiCloud(completion: @escaping () -> Void) {
+        iCloudStore.synchronize()
+
+        // iCloudからデータを取得
+        var icloudPastResults: [GameResult] = []
+        if let icloudResultsData = iCloudStore.data(forKey: pastResultsKey) {
+            icloudPastResults = (try? JSONDecoder().decode([GameResult].self, from: icloudResultsData)) ?? []
+        }
+        let icloudCurrentStreak = Int(iCloudStore.longLong(forKey: currentStreakKey))
+        let icloudBestStreak = Int(iCloudStore.longLong(forKey: bestStreakKey))
+
+        DispatchQueue.main.async {
+            // ローカルのデータとiCloudのデータをマージする
+            // (読み込み時にもマージを行い、不意なデータ損失を防ぐ)
+            let combinedResults = Set(self.pastResults + icloudPastResults)
+            let mergedPastResults = Array(combinedResults)
+            
+            // データが空でない方を優先する
+            if !mergedPastResults.isEmpty {
+                self.pastResults = mergedPastResults
             }
+
+            self.currentStreak = max(self.currentStreak, icloudCurrentStreak)
+            self.bestStreak = max(self.bestStreak, icloudBestStreak)
+            
+            // 完了を通知
+            completion()
         }
     }
 
-    // Save past results to UserDefaults
-    func savePastResults() {
-        let defaults = UserDefaults.standard
-        if let encoded = try? JSONEncoder().encode(pastResults) {
-            defaults.set(encoded, forKey: pastResultsKey)
+    func saveToiCloud() {
+        // 1. iCloudから現在のデータを読み込む
+        var icloudPastResults: [GameResult] = []
+        if let icloudResultsData = iCloudStore.data(forKey: pastResultsKey) {
+            icloudPastResults = (try? JSONDecoder().decode([GameResult].self, from: icloudResultsData)) ?? []
+        }
+        let icloudCurrentStreak = Int(iCloudStore.longLong(forKey: currentStreakKey))
+        let icloudBestStreak = Int(iCloudStore.longLong(forKey: bestStreakKey))
+
+        // 2. ローカルのデータとiCloudのデータをマージする
+        let combinedResults = Set(self.pastResults + icloudPastResults)
+        let mergedPastResults = Array(combinedResults)
+        let mergedCurrentStreak = max(self.currentStreak, icloudCurrentStreak)
+        let mergedBestStreak = max(self.bestStreak, icloudBestStreak)
+
+        // 3. マージしたデータをiCloudに保存する
+        if let encoded = try? JSONEncoder().encode(mergedPastResults) {
+            iCloudStore.set(encoded, forKey: pastResultsKey)
+        }
+        iCloudStore.set(Int64(mergedCurrentStreak), forKey: currentStreakKey)
+        iCloudStore.set(Int64(mergedBestStreak), forKey: bestStreakKey)
+        iCloudStore.synchronize()
+
+        // 4. マージしたデータをローカルのViewModelにも反映させる
+        DispatchQueue.main.async {
+            self.pastResults = mergedPastResults
+            self.currentStreak = mergedCurrentStreak
+            self.bestStreak = mergedBestStreak
         }
     }
-    
     
     func cardImage(at index: Int) -> Image? {
         if index < cards.count {
@@ -89,13 +198,10 @@ class CardGameViewModel: ObservableObject {
         return Image(uiImage: uiImage)
     }
     
-    
-// Computed property for the current card image
     var currentCardImage: Image? {
         if currentCardIndex < cards.count {
             let card = cards[currentCardIndex]
             var uiImage = card.image
-            // Apply random rotation if needed
             if card.isRotated {
                 if let cgImage = uiImage.cgImage {
                     uiImage = UIImage(cgImage: cgImage, scale: uiImage.scale, orientation: .down)
@@ -107,7 +213,6 @@ class CardGameViewModel: ObservableObject {
         }
     }
 
-    // Computed property for the next card image
     var nextCardImage: Image? {
         let nextIndex = currentCardIndex + 1
         if nextIndex < cards.count {
@@ -130,8 +235,8 @@ class CardGameViewModel: ObservableObject {
             let imageName = "torifuda_F_\(i)"
             if let uiImage = UIImage(named: imageName) {
                 let isRotated = randomRotation ? Bool.random() : false
-                            let card = Card(image: uiImage, isRotated: isRotated)
-                            loadedCards.append(card)
+                let card = Card(image: uiImage, isRotated: isRotated)
+                loadedCards.append(card)
             } else {
                 print("Image \(imageName) not found")
             }
@@ -141,7 +246,9 @@ class CardGameViewModel: ObservableObject {
     
     func resetPastResults() {
         pastResults.removeAll()
-        savePastResults()
+        currentStreak = 0
+        bestStreak = 0
+        saveToiCloud()
     }
     
     func startButtonTapped() {
@@ -167,7 +274,6 @@ class CardGameViewModel: ObservableObject {
     
     func showCurrentCard() {
         if currentCardIndex < cards.count {
-            // Update cards left label
             let cardsLeft = cards.count - currentCardIndex
             let format = NSLocalizedString("cards_left_format", comment: "Format string for cards left")
             cardsLeftLabel = String.localizedStringWithFormat(format, cardsLeft)
@@ -181,12 +287,21 @@ class CardGameViewModel: ObservableObject {
         if let startTime = startTime, let endTime = endTime {
             let elapsedTime = endTime.timeIntervalSince(startTime)
             
-            // Save the result
             let newResult = GameResult(date: Date(), elapsedTime: elapsedTime)
             pastResults.append(newResult)
-            savePastResults()
             
             let isNewBest = bestScore == nil || bestScore == 0.00 || elapsedTime < bestScore!
+            
+            if isNewBest {
+                currentStreak += 1
+                if currentStreak > bestStreak {
+                    bestStreak = currentStreak
+                }
+            } else {
+                currentStreak = 0
+            }
+            
+            saveToiCloud()
             
             let timeString = String(format: "%.2f", elapsedTime)
             
@@ -252,13 +367,12 @@ class CardGameViewModel: ObservableObject {
 }
 
 struct CardGameView: View {
-    @StateObject var viewModel = CardGameViewModel()
+    @ObservedObject var viewModel: CardGameViewModel
     @State private var showSettings = false
+
     @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
     @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
-    @AppStorage("cardLayout") private var cardLayout: String = "Single"
-    @AppStorage("randomRotation") private var randomRotation: Bool = true
-    
+
     var body: some View {
         GeometryReader { geometry in
             let screenWidth = geometry.size.width
@@ -291,7 +405,6 @@ struct CardGameView: View {
                     }
                 }
                 
-                // Message Label
                 if viewModel.showMessageLabel {
                     Text(viewModel.message)
                         .font(.system(size: min(screenWidth, screenHeight) * 0.05))
@@ -301,7 +414,6 @@ struct CardGameView: View {
                         .foregroundColor(.primary)
                 }
                 
-                // Start Button
                 if viewModel.showStartButton {
                     VStack {
                         Spacer()
@@ -310,7 +422,7 @@ struct CardGameView: View {
                                 .font(.system(size: min(screenWidth, screenHeight) * 0.06))
                                 .fontWeight(.bold)
                                 .padding(.bottom, geometry.size.height * 0.01)
-                                .multilineTextAlignment(.center) // Center the text
+                                .multilineTextAlignment(.center)
                         } else {
                             Text("さあゲームに挑戦だ！")
                                 .font(.system(size: min(screenWidth, screenHeight) * 0.06))
@@ -330,12 +442,11 @@ struct CardGameView: View {
                                         .stroke(Color.primary, lineWidth: 2)
                                 )
                         }
-                        .frame(maxWidth: .infinity) // Make VStack take full width
+                        .frame(maxWidth: .infinity)
                         .padding(.bottom, geometry.size.height * 0.14)
                     }
                 }
                 
-                // End Button
                 if viewModel.showEndButton {
                     VStack {
                         Spacer()
@@ -357,9 +468,6 @@ struct CardGameView: View {
                 }
                 
             }
-            .onChange(of: randomRotation) { newValue in
-                viewModel.loadImages()
-            }
         }
     }
     
@@ -373,7 +481,6 @@ struct CardGameView: View {
             .onEnded { value in
                 let dragDistance = hypot(value.translation.width, value.translation.height)
                 if dragDistance > 50 {
-                // Store the current card as the previous card
                     viewModel.previousCard = viewModel.cards[ viewModel.currentCardIndex]
                     viewModel.previousCardOffset = viewModel.cardOffset
                     viewModel.previousCardRotation = viewModel.cardRotation
@@ -385,10 +492,8 @@ struct CardGameView: View {
                         )
                     }
                     
-                    //Prepare the next card immediately
                     viewModel.handleSwipe()
                     
-                    // Reset the current card's offset and rotation
                     viewModel.cardOffset = .zero
                     viewModel.cardRotation = 0
                     
@@ -415,7 +520,6 @@ struct CardGameView: View {
                     .padding()
                     .animation(nil, value: viewModel.currentCardIndex)
             }
-            // Current card with gesture and animation
             if let currentCard = viewModel.cards[safe: viewModel.currentCardIndex] {
                 viewModel.image(for: currentCard)
                     .resizable()
@@ -428,7 +532,6 @@ struct CardGameView: View {
                 
             }
             
-            // Previous card being animated off
             if let previousCard = viewModel.previousCard {
                 viewModel.image(for: previousCard)
                     .resizable()
@@ -449,32 +552,43 @@ struct Card {
     let isRotated: Bool
 }
 
-struct GameResult: Codable, Identifiable {
+struct GameResult: Codable, Identifiable, Hashable {
     let id: UUID
     let date: Date
     let elapsedTime: TimeInterval
 
-// Custom initializer to assign a new UUID
+    // Conform to Equatable for Hashable
+    static func == (lhs: GameResult, rhs: GameResult) -> Bool {
+        return lhs.date == rhs.date && lhs.elapsedTime == rhs.elapsedTime
+    }
+
+    // Conform to Hashable
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(date)
+        hasher.combine(elapsedTime)
+    }
+
     init(id: UUID = UUID(), date: Date, elapsedTime: TimeInterval) {
         self.id = id
         self.date = date
         self.elapsedTime = elapsedTime
     }
 
-    // Define CodingKeys excluding 'id'
+    // MARK: - Codable
+    // The custom Codable implementation is needed to handle the `id` property,
+    // which we don't want to save but need for Identifiable.
+
     private enum CodingKeys: String, CodingKey {
         case date, elapsedTime
     }
 
-    // Custom initializer for decoding
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.date = try container.decode(Date.self, forKey: .date)
         self.elapsedTime = try container.decode(TimeInterval.self, forKey: .elapsedTime)
-        self.id = UUID() // Assign a new UUID since it's not decoded
+        self.id = UUID() // Assign a new UUID since it's not in the saved data
     }
 
-    // Custom encoder to exclude 'id'
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(date, forKey: .date)
@@ -482,14 +596,6 @@ struct GameResult: Codable, Identifiable {
     }
 }
 
-
-//extension Array {
-//    subscript(safe index: Int) -> Element? {
-//        return indices.contains(index) ? self[index] : nil
-//    }
-//}
-//    
-    
 struct CardGameView_Previews: PreviewProvider {
     static var previews: some View {
         CardGameView(viewModel: CardGameViewModel())

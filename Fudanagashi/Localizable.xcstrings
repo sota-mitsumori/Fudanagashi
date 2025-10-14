@@ -23,6 +23,9 @@
         }
       }
     },
+    "%lld" : {
+      "shouldTranslate" : false
+    },
     "2024-2025" : {
       "shouldTranslate" : false
     },
@@ -460,28 +463,6 @@
         }
       }
     },
-    "これまでの総プレイ回数: %lld" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Total Games Played: %lld"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Total de juegos jugados: %lld"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Nombre total de parties jouées : %lld"
-          }
-        }
-      }
-    },
     "さあゲームに挑戦だ！" : {
       "localizations" : {
         "en" : {
@@ -615,6 +596,28 @@
         }
       }
     },
+    "ベストスコア" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Best Score"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mejor puntuación"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Meilleur score"
+          }
+        }
+      }
+    },
     "ベストスコア: %@秒" : {
       "localizations" : {
         "en" : {
@@ -678,6 +681,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Site web:"
+          }
+        }
+      }
+    },
+    "まだゲームをプレイしていません" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No past game score to display"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay puntuación de juegos anteriores para mostrar"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aucun score de jeu précédent à afficher"
           }
         }
       }
@@ -833,28 +858,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Infos"
-          }
-        }
-      }
-    },
-    "日付: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Date: %@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fecha: %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Date : %@"
           }
         }
       }
@@ -1060,6 +1063,28 @@
         }
       }
     },
+    "総プレイ回数" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Games Played"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de juegos jugados"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre total de parties jouées"
+          }
+        }
+      }
+    },
     "表示オプション" : {
       "localizations" : {
         "en" : {
@@ -1082,46 +1107,24 @@
         }
       }
     },
-    "表示する過去のゲームがありません" : {
+    "記録" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No past game score to display"
+            "value" : "Result"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "No hay puntuación de juegos anteriores para mostrar"
+            "value" : "Résultat"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Aucun score de jeu précédent à afficher"
-          }
-        }
-      }
-    },
-    "記録: %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Result:%@"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résultat : %@"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Résultat : %@"
+            "value" : "Résultat"
           }
         }
       }
@@ -1192,7 +1195,7 @@
         }
       }
     },
-    "過去のゲーム結果" : {
+    "過去のゲーム記録" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

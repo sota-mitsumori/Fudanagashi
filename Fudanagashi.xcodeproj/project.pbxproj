@@ -411,7 +411,7 @@
 		BEC1DA992CAA3905009C5FAF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Fudanagashi;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fudanagashi/Fudanagashi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -449,7 +449,7 @@
 		BEC1DA9A2CAA3905009C5FAF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = Fudanagashi;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Fudanagashi/Fudanagashi.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";

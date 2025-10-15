@@ -4,7 +4,19 @@
   },
   "groups" : [
     {
-      "blend-mode" : "plus-darker",
+      "blend-mode-specializations" : [
+        {
+          "value" : "plus-darker"
+        },
+        {
+          "appearance" : "dark",
+          "value" : "plus-lighter"
+        },
+        {
+          "appearance" : "tinted",
+          "value" : "plus-darker"
+        }
+      ],
       "blur-material" : 0,
       "layers" : [
         {

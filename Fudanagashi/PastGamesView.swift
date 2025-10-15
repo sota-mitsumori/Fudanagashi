@@ -56,7 +56,7 @@ struct PastGamesView: View {
                                             .tracking(0.5)
                                         
                                         if let bestResult = viewModel.pastResults.min(by: { $0.elapsedTime < $1.elapsedTime }) {
-                                            Text(formattedTime(bestResult.elapsedTime))
+                                            Text(formattedTime(bestResult.elapsedTime) + "s")
                                                 .font(.system(size: 18, weight: .semibold, design: .rounded))
                                                 .foregroundColor(.green)
                                         }
@@ -109,7 +109,7 @@ struct PastGamesView: View {
     private func formattedTime(_ interval: TimeInterval) -> String {
         let seconds = Int(interval)
         let fractions = Int((interval - Double(Int(interval))) * 100)
-        return String(format: "%d.%02d秒", seconds, fractions)
+        return String(format: "%d.%02d", seconds, fractions)
     }
 }
 
@@ -127,7 +127,7 @@ struct GameResultCard: View {
     private func formattedTime(_ interval: TimeInterval) -> String {
         let seconds = Int(interval)
         let fractions = Int((interval - Double(Int(interval))) * 100)
-        return String(format: "%d.%02d秒", seconds, fractions)
+        return String(format: "%d.%02d", seconds, fractions)
     }
     
     var body: some View {
@@ -158,7 +158,7 @@ struct GameResultCard: View {
                     
                     Spacer()
                     
-                    Text(formattedTime(result.elapsedTime))
+                    Text(formattedTime(result.elapsedTime) + "s")
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                         .foregroundColor(.primary)
                 }

@@ -93,7 +93,7 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("バージョン")) {
-                    Text("Version 2.2.0 (2025.10.15)")
+                    Text("Version 2.2.1 (2025.12.16)")
                 }
             }
             .navigationBarTitle("設定", displayMode: .inline)

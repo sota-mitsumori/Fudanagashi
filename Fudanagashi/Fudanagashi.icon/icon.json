@@ -20,18 +20,6 @@
       "blur-material" : 0,
       "layers" : [
         {
-          "image-name" : "hat-308003_1280.png",
-          "name" : "hat-308003_1280",
-          "opacity" : 1,
-          "position" : {
-            "scale" : 0.25,
-            "translation-in-points" : [
-              287.8921875,
-              -354.6467400565931
-            ]
-          }
-        },
-        {
           "blend-mode" : "normal",
           "fill" : "automatic",
           "glass" : true,

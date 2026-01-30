@@ -119,7 +119,7 @@ struct DeveloperView: View {
                     .foregroundColor(.secondary)
                 Text("ホームページ:")
                     .fontWeight(.medium)
-                Link("公式サイト", destination: URL(string: "https://sota-mitsumori.github.io/Karuta-Fudanagashi/")!)
+                Link("公式サイト", destination: URL(string: "https://fudanagashi.vercel.app/")!)
                     .foregroundColor(.blue)
             }
             .padding(.leading)

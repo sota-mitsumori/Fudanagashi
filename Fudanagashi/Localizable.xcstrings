@@ -151,13 +151,42 @@
         }
       }
     },
+    "final_card_kimariji_format" : {
+      "comment" : "Result line that shows the final card kimariji",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Final card Kimariji:\n%@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kimariji de la\ncarta final:\n%@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kimariji de la\nderniere carte:\n%@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最後の札の決まり字\n%@"
+          }
+        }
+      }
+    },
     "game_clear_message_best" : {
       "extractionState" : "extracted_with_value",
       "localizations" : {
         "ja" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@\n%2$@\n%3$@"
+            "value" : "%1$@\n%2$@\n%3$@\n%4$@"
           }
         }
       },
@@ -169,7 +198,7 @@
         "ja" : {
           "stringUnit" : {
             "state" : "new",
-            "value" : "%1$@\n%2$@\n%3$@"
+            "value" : "%1$@\n%2$@\n%3$@\n%4$@"
           }
         }
       },
@@ -262,8 +291,8 @@
         }
       }
     },
-    "Version 2.2.3 (2026.01.31)" : {
-      "shouldTranslate" : false
+    "Version 2.3.0 (2026.04.29)" : {
+
     },
     "オリジナル画像のページを開く" : {
       "localizations" : {
@@ -903,6 +932,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Affichage des cartes"
+          }
+        }
+      }
+    },
+    "次の札に直前の決まり字を表示" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show the previous Kimariji on the next card"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar el Kimariji anterior en la siguiente carta"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Afficher le Kimariji precedent sur la carte suivante"
           }
         }
       }

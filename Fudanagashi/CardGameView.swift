@@ -30,6 +30,7 @@ class CardGameViewModel: ObservableObject {
 
     // Device-Local Settings
     @AppStorage("randomRotation") private var randomRotation: Bool = true
+    @AppStorage("showPreviousKimarijiOnNextCard") private var showPreviousKimarijiOnNextCard: Bool = true
 
     private let iCloudStore = NSUbiquitousKeyValueStore.default
 
@@ -235,7 +236,7 @@ class CardGameViewModel: ObservableObject {
             let imageName = "torifuda_F_\(i)"
             if let uiImage = UIImage(named: imageName) {
                 let isRotated = randomRotation ? Bool.random() : false
-                let card = Card(image: uiImage, isRotated: isRotated)
+                let card = Card(image: uiImage, isRotated: isRotated, poemNumber: i)
                 loadedCards.append(card)
             } else {
                 print("Image \(imageName) not found")
@@ -304,18 +305,21 @@ class CardGameViewModel: ObservableObject {
             saveToiCloud()
             
             let timeString = String(format: "%.2f", elapsedTime)
+            let finalCardKimarijiLine = finalCardKimarijiLine
             
             if isNewBest {
                 message = String(localized: "game_clear_message_best", defaultValue: """
                 \(String(localized: "game_clear_title"))
                 \(String(format: String(localized: "time_elapsed"), timeString))
                 \(String(localized: "best_score"))
+                \(finalCardKimarijiLine)
                 """)
             } else {
                 message = String(localized: "game_clear_message_try_again", defaultValue: """
                 \(String(localized: "game_clear_title"))
                 \(String(format: String(localized: "time_elapsed"), timeString))
                 \(String(localized: "try_again"))
+                \(finalCardKimarijiLine)
                 """)
             }
             showMessageLabel = true
@@ -364,6 +368,17 @@ class CardGameViewModel: ObservableObject {
             timerLabel = String.localizedStringWithFormat(format, elapsedTime)
         }
     }
+
+    private var finalCardKimarijiLine: String {
+        guard showPreviousKimarijiOnNextCard,
+              currentCardIndex > 0,
+              let finalCard = cards[safe: currentCardIndex - 1],
+              let kimariji = KimarijiStore.shared.kimariji(for: finalCard.poemNumber) else {
+            return ""
+        }
+
+        return String(format: String(localized: "final_card_kimariji_format"), kimariji)
+    }
 }
 
 struct CardGameView: View {
@@ -372,6 +387,7 @@ struct CardGameView: View {
 
     @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
     @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
+    @AppStorage("showPreviousKimarijiOnNextCard") private var showPreviousKimarijiOnNextCard: Bool = true
 
     var body: some View {
         GeometryReader { geometry in
@@ -514,21 +530,50 @@ struct CardGameView: View {
     var singleCardView: some View {
         ZStack {
             if let nextCard = viewModel.cards[safe: viewModel.currentCardIndex + 1] {
-                viewModel.image(for: nextCard)
-                    .resizable()
-                    .scaledToFit()
-                    .padding()
-                    .animation(nil, value: viewModel.currentCardIndex)
+                ZStack(alignment: .topTrailing) {
+                    viewModel.image(for: nextCard)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(.horizontal)
+                        .padding(.top, 20)
+                        .padding(.bottom)
+                        .animation(nil, value: viewModel.currentCardIndex)
+
+                    if let previousKimarijiForNextCard {
+                        Text(previousKimarijiForNextCard)
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                            .foregroundStyle(.primary)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .shadow(color: Color.black.opacity(0.12), radius: 8, y: 2)
+                            .padding(.top, -25)
+                            .padding(.trailing, 40)
+                    }
+                }
             }
             if let currentCard = viewModel.cards[safe: viewModel.currentCardIndex] {
-                viewModel.image(for: currentCard)
-                    .resizable()
-                    .scaledToFit()
-                    .offset(viewModel.cardOffset)
-                    .rotationEffect(.degrees(viewModel.cardRotation))
-                    .gesture(dragGesture)
-                    .padding()
-                    .animation(nil, value: viewModel.currentCardIndex)
+                ZStack(alignment: .topTrailing) {
+                    viewModel.image(for: currentCard)
+                        .resizable()
+                        .scaledToFit()
+                        .offset(viewModel.cardOffset)
+                        .rotationEffect(.degrees(viewModel.cardRotation))
+                        .gesture(dragGesture)
+                        .padding()
+                        .animation(nil, value: viewModel.currentCardIndex)
+
+                    if viewModel.cards[safe: viewModel.currentCardIndex + 1] == nil,
+                       let previousKimarijiForCurrentCard {
+                        Text(previousKimarijiForCurrentCard)
+                            .font(.system(size: 25, weight: .bold, design: .rounded))
+                            .foregroundStyle(.primary)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .shadow(color: Color.black.opacity(0.12), radius: 8, y: 2)
+                            .padding(.top, -25)
+                            .padding(.trailing, 30)
+                    }
+                }
                 
             }
             
@@ -545,11 +590,30 @@ struct CardGameView: View {
         }
         .animation(nil, value: viewModel.currentCardIndex)
     }
+
+    private var previousKimarijiForNextCard: String? {
+        guard showPreviousKimarijiOnNextCard,
+              let previousCard = viewModel.cards[safe: viewModel.currentCardIndex - 1] else {
+            return nil
+        }
+
+        return KimarijiStore.shared.kimariji(for: previousCard.poemNumber)
+    }
+
+    private var previousKimarijiForCurrentCard: String? {
+        guard showPreviousKimarijiOnNextCard,
+              let previousCard = viewModel.cards[safe: viewModel.currentCardIndex - 1] else {
+            return nil
+        }
+
+        return KimarijiStore.shared.kimariji(for: previousCard.poemNumber)
+    }
 }
 
 struct Card {
     let image: UIImage
     let isRotated: Bool
+    let poemNumber: Int
 }
 
 struct GameResult: Codable, Identifiable, Hashable {
@@ -593,6 +657,38 @@ struct GameResult: Codable, Identifiable, Hashable {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(date, forKey: .date)
         try container.encode(elapsedTime, forKey: .elapsedTime)
+    }
+}
+
+private struct KimarijiEntry: Decodable {
+    let poemNumber: Int
+    let kimariji: String
+}
+
+private struct KimarijiPayload: Decodable {
+    let entries: [KimarijiEntry]
+}
+
+private final class KimarijiStore {
+    static let shared = KimarijiStore()
+
+    private let kimarijiByPoemNumber: [Int: String]
+
+    private init() {
+        guard let url = Bundle.main.url(forResource: "Kimariji", withExtension: "json"),
+              let data = try? Data(contentsOf: url),
+              let payload = try? JSONDecoder().decode(KimarijiPayload.self, from: data) else {
+            kimarijiByPoemNumber = [:]
+            return
+        }
+
+        kimarijiByPoemNumber = Dictionary(
+            uniqueKeysWithValues: payload.entries.map { ($0.poemNumber, $0.kimariji) }
+        )
+    }
+
+    func kimariji(for poemNumber: Int) -> String? {
+        kimarijiByPoemNumber[poemNumber]
     }
 }
 

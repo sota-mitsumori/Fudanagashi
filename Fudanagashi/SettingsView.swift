@@ -4,6 +4,7 @@ struct SettingsView: View {
     @AppStorage("randomRotation") private var randomRotation: Bool = true
     @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
     @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
+    @AppStorage("showPreviousKimarijiOnNextCard") private var showPreviousKimarijiOnNextCard: Bool = true
     
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: CardGameViewModel
@@ -24,6 +25,7 @@ struct SettingsView: View {
                 Section(header: Text("表示オプション")) {
                     Toggle("経過時間を表示", isOn: $displayTimerLabel)
                     Toggle("残り枚数を表示", isOn: $displayCardsLeftLabel)
+                    Toggle("次の札に直前の決まり字を表示", isOn: $showPreviousKimarijiOnNextCard)
                 }
 
                 Section(header: Text("データ同期")) {
@@ -93,7 +95,7 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("バージョン")) {
-                    Text("Version 2.2.3 (2026.01.31)")
+                    Text("Version 2.3.0 (2026.04.29)")
                 }
             }
             .navigationBarTitle("設定", displayMode: .inline)

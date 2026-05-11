@@ -5,7 +5,8 @@ struct SettingsView: View {
     @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
     @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
     @AppStorage("showPreviousKimarijiOnNextCard") private var showPreviousKimarijiOnNextCard: Bool = true
-    
+    @AppStorage("adaptKimarijiHenka") private var adaptKimarijiHenka: Bool = true
+
     @Environment(\.presentationMode) var presentationMode
     @ObservedObject var viewModel: CardGameViewModel
     @State private var isShowingAlert: Bool = false
@@ -26,6 +27,14 @@ struct SettingsView: View {
                     Toggle("経過時間を表示", isOn: $displayTimerLabel)
                     Toggle("残り枚数を表示", isOn: $displayCardsLeftLabel)
                     Toggle("次の札に直前の決まり字を表示", isOn: $showPreviousKimarijiOnNextCard)
+                        .onChange(of: showPreviousKimarijiOnNextCard) { _, newValue in
+                            if !newValue {
+                                adaptKimarijiHenka = false
+                            }
+                        }
+                    if showPreviousKimarijiOnNextCard {
+                        Toggle(String(localized: "adapt_kimariji_henka"), isOn: $adaptKimarijiHenka)
+                    }
                 }
 
                 Section(header: Text("データ同期")) {
@@ -95,7 +104,7 @@ struct SettingsView: View {
                 }
                 
                 Section(header: Text("バージョン")) {
-                    Text("Version 2.3.0 (2026.04.29)")
+                    Text("Version 2.4.0 (2026.05.11)")
                 }
             }
             .navigationBarTitle("設定", displayMode: .inline)

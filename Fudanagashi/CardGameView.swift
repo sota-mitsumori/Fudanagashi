@@ -16,6 +16,11 @@ class CardGameViewModel: ObservableObject {
     @Published var timerLabel: String = ""
     @Published var cardsLeftLabel: String = ""
     @Published var message: String = ""
+
+    /// クリア結果で「最後の札の決まり字」ブロックを別表示するとき true
+    @Published var showResultFinalKimarijiBlock: Bool = false
+    @Published var resultFinalKimarijiReference: String = ""
+    @Published var resultFinalKimarijiEffective: String = ""
     
     @Published var showStartButton: Bool = true
     @Published var showEndButton: Bool = false
@@ -31,6 +36,7 @@ class CardGameViewModel: ObservableObject {
     // Device-Local Settings
     @AppStorage("randomRotation") private var randomRotation: Bool = true
     @AppStorage("showPreviousKimarijiOnNextCard") private var showPreviousKimarijiOnNextCard: Bool = true
+    @AppStorage("adaptKimarijiHenka") private var adaptKimarijiHenka: Bool = true
 
     private let iCloudStore = NSUbiquitousKeyValueStore.default
 
@@ -259,6 +265,9 @@ class CardGameViewModel: ObservableObject {
         showTimerLabel = true
         showStartButton = false
         showMessageLabel = false
+        showResultFinalKimarijiBlock = false
+        resultFinalKimarijiReference = ""
+        resultFinalKimarijiEffective = ""
         showCardsLeftLabel = true
         showEndButton = false
         cards.shuffle()
@@ -270,6 +279,9 @@ class CardGameViewModel: ObservableObject {
         startTime = nil
         showStartButton = true
         showMessageLabel = false
+        showResultFinalKimarijiBlock = false
+        resultFinalKimarijiReference = ""
+        resultFinalKimarijiEffective = ""
         showEndButton = false
     }
     
@@ -305,22 +317,29 @@ class CardGameViewModel: ObservableObject {
             saveToiCloud()
             
             let timeString = String(format: "%.2f", elapsedTime)
-            let finalCardKimarijiLine = finalCardKimarijiLine
-            
+
+            if let pair = resultFinalCardKimarijiPair() {
+                showResultFinalKimarijiBlock = true
+                resultFinalKimarijiReference = pair.reference
+                resultFinalKimarijiEffective = pair.effective
+            } else {
+                showResultFinalKimarijiBlock = false
+                resultFinalKimarijiReference = ""
+                resultFinalKimarijiEffective = ""
+            }
+
             if isNewBest {
-                message = String(localized: "game_clear_message_best", defaultValue: """
+                message = """
                 \(String(localized: "game_clear_title"))
                 \(String(format: String(localized: "time_elapsed"), timeString))
                 \(String(localized: "best_score"))
-                \(finalCardKimarijiLine)
-                """)
+                """
             } else {
-                message = String(localized: "game_clear_message_try_again", defaultValue: """
+                message = """
                 \(String(localized: "game_clear_title"))
                 \(String(format: String(localized: "time_elapsed"), timeString))
                 \(String(localized: "try_again"))
-                \(finalCardKimarijiLine)
-                """)
+                """
             }
             showMessageLabel = true
             showStartButton = true
@@ -369,15 +388,22 @@ class CardGameViewModel: ObservableObject {
         }
     }
 
-    private var finalCardKimarijiLine: String {
+    private func resultFinalCardKimarijiPair() -> (reference: String, effective: String)? {
         guard showPreviousKimarijiOnNextCard,
               currentCardIndex > 0,
-              let finalCard = cards[safe: currentCardIndex - 1],
-              let kimariji = KimarijiStore.shared.kimariji(for: finalCard.poemNumber) else {
-            return ""
+              let finalCard = cards[safe: currentCardIndex - 1] else {
+            return nil
         }
-
-        return String(format: String(localized: "final_card_kimariji_format"), kimariji)
+        let prevIdx = currentCardIndex - 1
+        let remaining = Set(cards[prevIdx...].map(\.poemNumber))
+        let reference = KimarijiStore.shared.kimariji(for: finalCard.poemNumber) ?? ""
+        let effective = KimarijiDisplayHelper.kimariji(
+            poemNumber: finalCard.poemNumber,
+            remainingPoemNumbers: remaining,
+            useHenka: adaptKimarijiHenka
+        )
+        guard !effective.isEmpty else { return nil }
+        return (reference, effective)
     }
 }
 
@@ -388,6 +414,7 @@ struct CardGameView: View {
     @AppStorage("displayTimerLabel") private var displayTimerLabel: Bool = true
     @AppStorage("displayCardsLeftLabel") private var displayCardsLeftLabel: Bool = true
     @AppStorage("showPreviousKimarijiOnNextCard") private var showPreviousKimarijiOnNextCard: Bool = true
+    @AppStorage("adaptKimarijiHenka") private var adaptKimarijiHenka: Bool = true
 
     var body: some View {
         GeometryReader { geometry in
@@ -422,12 +449,26 @@ struct CardGameView: View {
                 }
                 
                 if viewModel.showMessageLabel {
-                    Text(viewModel.message)
-                        .font(.system(size: min(screenWidth, screenHeight) * 0.05))
-                        .multilineTextAlignment(.center)
-                        .fontWeight(.bold)
-                        .padding(.bottom, screenHeight * 0.1)
-                        .foregroundColor(.primary)
+                    let resultFont = Font.system(size: min(screenWidth, screenHeight) * 0.05, weight: .bold)
+                    VStack(spacing: 6) {
+                        Text(viewModel.message)
+                            .font(resultFont)
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(.primary)
+                        if viewModel.showResultFinalKimarijiBlock {
+                            Text(String(format: String(localized: "final_card_kimariji_format"), ""))
+                                .font(resultFont)
+                                .multilineTextAlignment(.center)
+                                .foregroundStyle(.primary)
+                            KimarijiDisplayHelper.kimarijiColoredText(
+                                reference: viewModel.resultFinalKimarijiReference,
+                                effective: viewModel.resultFinalKimarijiEffective
+                            )
+                            .font(resultFont)
+                            .multilineTextAlignment(.center)
+                        }
+                    }
+                    .padding(.bottom, screenHeight * 0.1)
                 }
                 
                 if viewModel.showStartButton {
@@ -539,10 +580,11 @@ struct CardGameView: View {
                         .padding(.bottom)
                         .animation(nil, value: viewModel.currentCardIndex)
 
-                    if let previousKimarijiForNextCard {
-                        Text(previousKimarijiForNextCard)
+                    if showPreviousKimarijiOnNextCard,
+                       let prevCard = viewModel.cards[safe: viewModel.currentCardIndex - 1] {
+                        let prevIdx = viewModel.currentCardIndex - 1
+                        kimarijiStyled(for: prevCard.poemNumber, prevCardIndex: prevIdx)
                             .font(.system(size: 25, weight: .bold, design: .rounded))
-                            .foregroundStyle(.primary)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
                             .shadow(color: Color.black.opacity(0.12), radius: 8, y: 2)
@@ -563,10 +605,11 @@ struct CardGameView: View {
                         .animation(nil, value: viewModel.currentCardIndex)
 
                     if viewModel.cards[safe: viewModel.currentCardIndex + 1] == nil,
-                       let previousKimarijiForCurrentCard {
-                        Text(previousKimarijiForCurrentCard)
+                       showPreviousKimarijiOnNextCard,
+                       let prevCard = viewModel.cards[safe: viewModel.currentCardIndex - 1] {
+                        let prevIdx = viewModel.currentCardIndex - 1
+                        kimarijiStyled(for: prevCard.poemNumber, prevCardIndex: prevIdx)
                             .font(.system(size: 25, weight: .bold, design: .rounded))
-                            .foregroundStyle(.primary)
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
                             .shadow(color: Color.black.opacity(0.12), radius: 8, y: 2)
@@ -591,22 +634,18 @@ struct CardGameView: View {
         .animation(nil, value: viewModel.currentCardIndex)
     }
 
-    private var previousKimarijiForNextCard: String? {
-        guard showPreviousKimarijiOnNextCard,
-              let previousCard = viewModel.cards[safe: viewModel.currentCardIndex - 1] else {
-            return nil
+    private func kimarijiStyled(for poemNumber: Int, prevCardIndex: Int) -> Text {
+        let remaining = Set(viewModel.cards[prevCardIndex...].map(\.poemNumber))
+        let referenceSurface = KimarijiStore.shared.kimariji(for: poemNumber) ?? ""
+        let effective = KimarijiDisplayHelper.kimariji(
+            poemNumber: poemNumber,
+            remainingPoemNumbers: remaining,
+            useHenka: adaptKimarijiHenka
+        )
+        guard adaptKimarijiHenka else {
+            return Text(effective).foregroundStyle(.primary)
         }
-
-        return KimarijiStore.shared.kimariji(for: previousCard.poemNumber)
-    }
-
-    private var previousKimarijiForCurrentCard: String? {
-        guard showPreviousKimarijiOnNextCard,
-              let previousCard = viewModel.cards[safe: viewModel.currentCardIndex - 1] else {
-            return nil
-        }
-
-        return KimarijiStore.shared.kimariji(for: previousCard.poemNumber)
+        return KimarijiDisplayHelper.kimarijiColoredText(reference: referenceSurface, effective: effective)
     }
 }
 
@@ -663,32 +702,44 @@ struct GameResult: Codable, Identifiable, Hashable {
 private struct KimarijiEntry: Decodable {
     let poemNumber: Int
     let kimariji: String
+    let reading: String?
 }
 
 private struct KimarijiPayload: Decodable {
     let entries: [KimarijiEntry]
 }
 
-private final class KimarijiStore {
+final class KimarijiStore {
     static let shared = KimarijiStore()
 
+    /// 札面・一覧用の決まり字（`Kimariji.json` の `kimariji`）
     private let kimarijiByPoemNumber: [Int: String]
+    /// 読み上げベース。`reading` が無いときは `kimariji` と同じ。
+    private let phoneticKimarijiByPoemNumber: [Int: String]
 
     private init() {
         guard let url = Bundle.main.url(forResource: "Kimariji", withExtension: "json"),
               let data = try? Data(contentsOf: url),
               let payload = try? JSONDecoder().decode(KimarijiPayload.self, from: data) else {
             kimarijiByPoemNumber = [:]
+            phoneticKimarijiByPoemNumber = [:]
             return
         }
 
         kimarijiByPoemNumber = Dictionary(
             uniqueKeysWithValues: payload.entries.map { ($0.poemNumber, $0.kimariji) }
         )
+        phoneticKimarijiByPoemNumber = Dictionary(uniqueKeysWithValues: payload.entries.map {
+            ($0.poemNumber, $0.reading ?? $0.kimariji)
+        })
     }
 
     func kimariji(for poemNumber: Int) -> String? {
         kimarijiByPoemNumber[poemNumber]
+    }
+
+    func phoneticKimariji(for poemNumber: Int) -> String? {
+        phoneticKimarijiByPoemNumber[poemNumber]
     }
 }
 

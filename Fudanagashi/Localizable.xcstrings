@@ -29,6 +29,35 @@
     "2024-2025" : {
       "shouldTranslate" : false
     },
+    "adapt_kimariji_henka" : {
+      "comment" : "Settings toggle: shorten kimariji when rival torifuda are no longer in the remaining deck",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adapt Kimariji as cards are discarded"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adaptar el Kimariji según las cartas restantes"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adapter le Kimariji selon les cartes restantes"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "決まり字の変化に対応"
+          }
+        }
+      }
+    },
     "best_score" : {
       "localizations" : {
         "en" : {
@@ -180,30 +209,6 @@
         }
       }
     },
-    "game_clear_message_best" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@\n%2$@\n%3$@\n%4$@"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
-    "game_clear_message_try_again" : {
-      "extractionState" : "extracted_with_value",
-      "localizations" : {
-        "ja" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@\n%2$@\n%3$@\n%4$@"
-          }
-        }
-      },
-      "shouldTranslate" : false
-    },
     "game_clear_title" : {
       "localizations" : {
         "en" : {
@@ -291,8 +296,8 @@
         }
       }
     },
-    "Version 2.3.0 (2026.04.29)" : {
-
+    "Version 2.4.0 (2026.05.11)" : {
+      "shouldTranslate" : false
     },
     "オリジナル画像のページを開く" : {
       "localizations" : {

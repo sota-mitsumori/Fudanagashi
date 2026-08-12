@@ -26,7 +26,7 @@
     "%lld" : {
       "shouldTranslate" : false
     },
-    "2024-2025" : {
+    "2024-2026" : {
       "shouldTranslate" : false
     },
     "adapt_kimariji_henka" : {
@@ -296,7 +296,7 @@
         }
       }
     },
-    "Version 2.4.0 (2026.05.11)" : {
+    "Version 2.4.1 (2026.08.12)" : {
       "shouldTranslate" : false
     },
     "オリジナル画像のページを開く" : {
@@ -604,6 +604,28 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Version"
+          }
+        }
+      }
+    },
+    "ふだながし" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fudanagashi"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fudanagashi"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fudanagashi"
           }
         }
       }
@@ -1004,28 +1026,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Afficher les cartes restantes"
-          }
-        }
-      }
-    },
-    "百人一首札流し" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fudanagashi"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fudanagashi"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Fudanagashi"
           }
         }
       }

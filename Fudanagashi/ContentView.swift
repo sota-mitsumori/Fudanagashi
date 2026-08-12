@@ -36,7 +36,7 @@ struct ContentView: View {
                     NavigationView {
                         GeometryReader { geometry in
                             CardGameView(viewModel: viewModel)
-                                .navigationBarTitle("百人一首札流し", displayMode: .large)
+                                .navigationBarTitle("ふだながし", displayMode: .large)
                                 .toolbar {
                                     ToolbarItem(placement: .navigationBarTrailing) {
                                         Button(action: {

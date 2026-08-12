@@ -47,7 +47,7 @@ struct DeveloperView: View {
             Text("三森颯太, 大戸暢丈")
                 .font(.headline)
                 .padding(.leading)
-            Text("2024-2025")
+            Text("2024-2026")
                 .font(.subheadline)
                 .foregroundColor(.secondary)
                 .padding(.leading)
@@ -119,7 +119,7 @@ struct DeveloperView: View {
                     .foregroundColor(.secondary)
                 Text("ホームページ:")
                     .fontWeight(.medium)
-                Link("公式サイト", destination: URL(string: "https://fudanagashi.vercel.app/")!)
+                Link("公式サイト", destination: URL(string: "https://fudanagashi.karuter.com")!)
                     .foregroundColor(.blue)
             }
             .padding(.leading)
